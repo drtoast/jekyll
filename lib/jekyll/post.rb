@@ -229,6 +229,7 @@ module Jekyll
       @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
       @url += "/" if url =~ /\/$/
       @url.gsub!(/\A([^\/])/, '/\1')
+      @url.sub!(/\.html$/, '')
       @url
     end
 
@@ -272,6 +273,7 @@ module Jekyll
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
       path = File.join(path, "index.html") if template[/\.html$/].nil?
+      path += '.html' if template[/\.html$/]
       path
     end
 
